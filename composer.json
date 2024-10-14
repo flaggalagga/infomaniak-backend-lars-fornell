@@ -1,0 +1,82 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "doctrine/dbal": "^3.6",
+        "guzzlehttp/guzzle": "^7.5",
+        "laravel/framework": "^10.7",
+        "laravel/tinker": "^2.8"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.21",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^7.4",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "phpunit": "phpunit -c phpunit.xml",
+        "test": "@phpunit --exclude-group=bonus",
+        "test+bonus": "@phpunit",
+        "test:migrations": "@test --group=migrations",
+        "test:migrations:movies": "@test --group=migrations:movies",
+        "test:migrations:reviews": "@test --group=migrations:reviews",
+        "test:populate": "@test --group=populate",
+        "test:api": "@test --group=api",
+        "test:api:create": "@test --group=api:create",
+        "test:api:show": "@test --group=api:show",
+        "test:api:list": "@test --group=api:list",
+        "test:api:filter": "@test --group=api:filter",
+        "test:api:pagination": "@test --group=api:pagination",
+        "test:api:update": "@test --group=api:update",
+        "test:api:delete": "@test --group=api:delete",
+        "test:api:validate": "@phpunit --group=api:validate",
+        "test:sorting": "@phpunit --group=sorting",
+        "test:config": "@test --group=config",
+        "test:middleware": "@test --group=middleware",
+        "test:relation": "@test --group=relation",
+        "test:review:create": "@phpunit --group=review:create",
+        "test:review:list": "@phpunit --group=review:list",
+        "test:review:update": "@phpunit --group=review:update",
+        "test:review:delete": "@phpunit --group=review:delete"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

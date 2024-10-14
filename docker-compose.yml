@@ -1,0 +1,31 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    laravel.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.2
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.2/app
+        ports:
+            - '${APP_PORT:-80}:80'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+    movies-api:
+      image: williamyeh/json-server
+      networks:
+        - sail
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./external-api/:/data
+      command: "--watch db.js --routes routes.json"
+networks:
+    sail:
+        driver: bridge
