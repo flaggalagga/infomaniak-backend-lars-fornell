@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 
-# Install composer dependencies with increased timeout and optimizations
+# Install composer dependencies
 echo "Installing composer dependencies..."
-docker run --rm \
-    --volume "$PWD":/app \
-    -e COMPOSER_PROCESS_TIMEOUT=600 \
-    composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --prefer-dist \
-    --no-progress
+docker run --rm --volume "$PWD":/app composer install --ignore-platform-reqs
 
 # Start Laravel Sail
 echo "Starting Laravel Sail"
